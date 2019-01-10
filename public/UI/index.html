@@ -1,0 +1,366 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Forms</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="http://localhost:8337/UI/css/bootstrap.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="http://localhost:8337/UI/css/business-casual.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <div class="container">
+
+        <div class="row">
+            <div class="box">
+
+                <div class="col-md-12">
+                    <!-- Nav tabs -->
+                    <div class="card">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#menu1" id="query_clk" aria-controls="menu1" role="tab" data-toggle="tab"> <span>Create</span></a></li>
+                            <li role="presentation"><a href="#menu2" id="query_tab" aria-controls="menu2" role="tab" data-toggle="tab"><span>Execute</span></a></li>
+                            <!-- <li role="presentation"><a href="#menu3" id="update_clk" aria-controls="menu3" role="tab" data-toggle="tab"><span>Update</span></a></li>
+                            <li role="presentation"><a href="#menu4" id="delete_clk" aria-controls="menu4" role="tab" data-toggle="tab">  <span>Delete</span></a></li> -->
+                        </ul>
+            
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="menu1">
+                                <form role="form">
+                                    <div class="row">
+                                      <div class="form-group col-lg-4">
+                                            <label>Token Address</label>
+                                            <input class="form-control" id="token_addr" type="text" placeholder="Token address">
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>From Address</label>
+                                            <input class="form-control" id="from_addr" type="text" placeholder="From Address">
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>Nonce</label>
+                                            <input class="form-control" id="nonce" type="text" placeholder="Nonce">
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>ETH Balance</label>
+                                            <input class="form-control" id="eth_bal" type="text" placeholder="ETH balance">
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>Token Name</label>
+                                            <input class="form-control" id="tkn_name" type="text" placeholder="Token name">
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>Token Balance</label>
+                                            <input class="form-control" id="tkn_bal" type="text" placeholder="Token Balance">
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>To Address</label>
+                                            <input class="form-control" id="to_addr" type="text" placeholder="To Address">
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>Value</label>
+                                            <input class="form-control" id="token_value" type="text" placeholder="Token Value to be sent">
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>Fee</label>
+                                            <input class="form-control" id="fee" type="text" placeholder="Fee for the transaction">
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 5%;">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <input type="submit" id="getTokens" tabindex="4" class="form-control btn btn-primary" value="Get ERC865 Token">
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <input type="submit" id="fetch_metamask" tabindex="4" class="form-control btn btn-primary" value="Fetch metamask">
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <input type="submit" id="create_signature" tabindex="4" class="form-control btn btn-primary" value="Create Signature">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="menu2">
+                                  <form role="form">
+                                      <div class="row" id="dyn_tb" style="display:none">
+                                        <div class="form-group col-lg-12">
+                                         <textarea class="form-control" id="query_tab_val" rows="15" style="display: none;"></textarea>
+                                         <div class="table-responsive striped panel-body">
+                                           <table class="table" id="tblid">
+                                            <thead class="thead-inverse">
+                                              <tr>
+                                                <th>Select</th>
+                                                <th>Signature</th>
+                                                <th>TokenName</th>
+                                                <th>From</th>
+                                                <th>To</th>
+                                                <th>Value</th>
+                                                <th>Fee</th>
+                                                <th>Nonce</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody id="tbltbody">
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-lg-4">
+                                            <label>Delegate address</label>
+                                            <input class="form-control" id="from_addr1" type="text" placeholder="Delegate Address">
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>ETH Balance</label>
+                                            <input class="form-control" id="eth_bal1" type="text" placeholder="ETH balance">
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>Token Name</label>
+                                            <input class="form-control" id="tkn_name1" type="text" placeholder="Token name">
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>Token Balance</label>
+                                            <input class="form-control" id="tkn_bal1" type="text" placeholder="Token Balance">
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 5%;">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-4 col-sm-offset-4">
+                                                    <input type="submit" id="fetch_metamask1" tabindex="4" class="form-control btn btn-primary" value="Fetch metamask">
+                                                </div>
+                                                <div class="col-sm-4 col-sm-offset-4" style="margin-top: 3%;">
+                                                    <input type="submit" id="execSign" tabindex="4" class="form-control btn btn-primary" value="Delegate Transfer">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                            
+                            <div class="lbl" style="text-align:center;">
+                              <label id="label_common"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+    <!-- jQuery -->
+    <script src="http://localhost:8337/UI/js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="http://localhost:8337/UI/js/bootstrap.min.js"></script>
+    <script src="http://localhost:8337/UI/js/abi.js"></script>
+<script>
+
+window.addEventListener('load', async () => {
+    // Modern dapp browsers...
+    if (window.ethereum) {
+        window.web3 = new Web3(ethereum);
+        try {
+            // Request account access if needed
+            await ethereum.enable();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    // Legacy dapp browsers...
+    else if (window.web3) {
+        window.web3 = new Web3(web3.currentProvider);
+    }
+    // Non-dapp browsers...
+    else {
+        console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+    }
+
+
+    //var web3 = new Web3.providers.HttpProvider("http://18.188.174.52:7890");
+    //web3.eth.defaultAccount = web3.eth.accounts[0];
+    
+    //console.log(contract);
+  
+    $("#fetch_metamask").click(function() {
+
+      var tkn = $("#token_addr").val();
+      var from = $("#from_addr").val();
+      var to = $("#to_addr").val();
+      var val = $("#token_value").val();
+      var fee = $("#fee").val();
+      var nonce;
+      var transferSig = "0x48664c16";
+
+      web3.eth.getAccounts(function(error, accounts) {
+        contract.getNonce(accounts[0], function(error, nonce) {
+            if(!error) {
+                web3.eth.getBalance(accounts[0], function(error, ethBalance) {
+                  contract.balanceOf(accounts[0], function(error, tknBalance) {
+                    contract.name(function(error, tknName) {
+                      nonce = Number(nonce) + Number(1);
+                      $("#token_addr").val(ContractAddress);
+                      $("#from_addr").val(accounts[0]);
+                      $("#nonce").val(nonce);
+                      $("#eth_bal").val(ethBalance / 10 ** 18);
+                      $("#tkn_name").val(tknName);
+                      $("#tkn_bal").val(tknBalance / 10 ** 18);
+                    });
+                  });
+                });              
+            } else {
+                console.log(error);
+                $("#label_common").text(error);
+            }
+        });
+      });
+      return false;
+    });
+
+    $("#getTokens").click(function() {
+      web3.eth.getAccounts(function(error, accounts) {
+          contract.transferFromContract(function(error, txHash) {
+            if (!error) {
+                console.log(txHash);
+                $("#label_common").text("Transaction hash : " + txHash);
+            } else {
+              console.log(error);
+              $("#label_common").text(error);
+            }
+          });
+      });
+      return false;
+    });
+
+    $("#fetch_metamask1").click(function() {
+
+      web3.eth.getAccounts(function(error, accounts) {
+        //contract.getNonce(accounts[0], function(error, nonce) {
+            if(!error) {
+                web3.eth.getBalance(accounts[0], function(error, ethBalance) {
+                  contract.balanceOf(accounts[0], function(error, tknBalance) {
+                    contract.name(function(error, tknName) {
+                      $("#from_addr1").val(accounts[0]);
+                      $("#eth_bal1").val(ethBalance / 10 ** 18);
+                      $("#tkn_name1").val(tknName);
+                      $("#tkn_bal1").val(tknBalance / 10 ** 18);
+                    });
+                  });
+                });              
+            } else {
+                console.log(error);
+                $("#label_common").text(error);
+            }
+        //});
+      });
+      return false;
+    });
+
+    $("#create_signature").click(function() {
+
+      var tkn = $("#token_addr").val();
+      var from = $("#from_addr").val();
+      var to = $("#to_addr").val();
+      var val = $("#token_value").val();
+      val = val * (10 ** 18);
+      var fee = $("#fee").val(); 
+      fee = fee * (10 ** 18);
+      var nonce = $("#nonce").val();
+      var transferSig = "0x48664c16";
+
+      web3.eth.getAccounts(function(error, accounts) {
+          contract.recoverPreSignedHash(ContractAddress, transferSig, to, val, fee, nonce, function(error, hash) {
+            if (!error) {
+              web3.eth.sign(accounts[0], hash, function(error, signature) {
+                if (!error) {
+                  console.log(hash);
+                  console.log(signature);
+                  $("#label_common").text(signature);
+                } else {
+                  console.log(error);
+                  $("#label_common").text(error);
+                }
+              });
+            } else {
+              console.log(error);
+              $("#label_common").text(error);
+            }
+          });
+      });
+      return false;
+    });
+
+    $("#query_tab").click(function() {
+
+      var tkn = $("#token_addr").val();
+      var from = $("#from_addr").val();
+      var to = $("#to_addr").val();
+      var val = $("#token_value").val();
+      var fee = $("#fee").val();
+      var nonce = $("#nonce").val();
+      var transferSig = "0x48664c16";
+      var sign = $("#label_common").text();
+      var tml;
+        $("#tbltbody").html("");
+
+                if(tml=="") {
+                tml="<tr><td><input type='checkbox' name='vehicle1' value='Bike'></td><td>" + sign + "</td><td>" + tkn + "</td><td>" + from + "</td><td>" + to + "</td><td>" + val + "</td><td>" + fee + "</td><td>" + nonce + "</td></tr>";
+                }
+                else{
+                tml=tml+"<tr><td><input type='checkbox' name='vehicle1' value='Bike'></td><td>" + sign + "</td><td>" + tkn + "</td><td>" + from + "</td><td>" + to + "</td><td>" + val + "</td><td>" + fee + "</td><td>" + nonce + "</td></tr>";
+                }   
+
+        $("#tbltbody").html(tml);
+        $("#dyn_tb").show();
+    });
+
+    $("#execSign").click(function() {
+
+      var tkn = $("#token_addr").val();
+      var from = $("#from_addr").val();
+      var to = $("#to_addr").val();
+      var val = $("#token_value").val(); 
+      val = val * (10 ** 18);
+      var fee = $("#fee").val(); 
+      fee = fee * (10 ** 18);
+      var nonce = $("#nonce").val();
+      var transferSig = "0x48664c16";
+      var sign = $("#label_common").text();
+
+      web3.eth.getAccounts(function(error, accounts) {
+          contract.transferPreSigned(sign, to, val, fee, nonce, function(error, txHash) {
+            if (!error) {
+                console.log(txHash);
+                $("#label_common").text("Transaction hash : " + txHash);
+            } else {
+              console.log(error);
+              $("#label_common").text(error);
+            }
+          });
+      });
+      return false;
+    });
+});
+</script>
+  
+</body>
+</html>
