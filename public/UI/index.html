@@ -161,6 +161,11 @@
                             <div class="lbl" style="text-align:center;">
                               <label id="label_common"></label>
                             </div>
+
+                            <label id="txlink" style="margin-left: 20%">
+                                <span id="txspan" style="display: none;">Check your transaction status : </span>
+                                <a id="linktx" href = '' target="_blank"></a>
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -241,7 +246,10 @@ window.addEventListener('load', async () => {
           contract.transferFromContract(function(error, txHash) {
             if (!error) {
                 console.log(txHash);
-                $("#label_common").text("Transaction hash : " + txHash);
+                //$("#label_common").text("Transaction hash : " + txHash);
+                $("#txspan").show();
+                $("#linktx").text(txHash);
+                $("#linktx").attr('href', 'https://rinkeby.etherscan.io/tx/' + txHash);
             } else {
               console.log(error);
               $("#label_common").text(error);
@@ -350,7 +358,10 @@ window.addEventListener('load', async () => {
           contract.transferPreSigned(sign, to, val, fee, nonce, function(error, txHash) {
             if (!error) {
                 console.log(txHash);
-                $("#label_common").text("Transaction hash : " + txHash);
+                //$("#label_common").text("Transaction hash : " + txHash);
+                $("#txspan").show();
+                $("#linktx").text(txHash);
+                $("#linktx").attr('href', 'https://rinkeby.etherscan.io/tx/' + txHash);
             } else {
               console.log(error);
               $("#label_common").text(error);
